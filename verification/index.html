@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Yak Chat | verification</title>
+	<script>
+		var xmlHttp = new XMLHttpRequest();
+		const hash = document.location.hash.split('#')[1];
+		var url = 'https://us-central1-yakchat-20e2a.cloudfunctions.net/submitVerification';
+		//var url = 'http://localhost:5000/yakchat-20e2a/us-central1/submitVerification';
+		url += ('?u=' + hash)
+		xmlHttp.onreadystatechange = function() { 
+			console.log(xmlHttp.readyState, xmlHttp.status, xmlHttp.responseText)
+			if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+				document.querySelector('#welcome > h1').innerHTML = 'Successfuly verified';
+				document.querySelector('#welcome > p').innerHTML = 'DONE';
+				setTimeout(() => {
+					if (window.location.pathname.match('yakchat') === null) {
+						window.location.href = '/';
+					} else {
+						window.location.href = '/yakchat/backoffice';
+					}
+				}, 1000);
+			}
+		}
+		xmlHttp.open("GET", url, true); // true for asynchronous 
+		xmlHttp.send(null);
+	</script>
+	<link rel="stylesheet" href="../css/verification.css">
+</head>
+<body>
+	<div id="welcome">
+		<h1>We're verifying your acount</h1>
+		<p> Almost Done... </p>
+	</div>
+</body>
+</html>
