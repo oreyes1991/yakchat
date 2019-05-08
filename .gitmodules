@@ -1,0 +1,3 @@
+[submodule "backoficce"]
+	path = backoficce
+	url = https://github.com/oreyes1991/yakchat-backoffice.git
